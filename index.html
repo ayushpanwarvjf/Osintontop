@@ -56,7 +56,7 @@
       resBox.textContent = "⏳ Fetching...";
 
       try {
-        const res = await fetch(`/.netlify/functions/fetchData?number=${number}`);
+        const res = await fetch(`/functions/fetchData?number=${number}`);
         const data = await res.json();
         resBox.textContent = JSON.stringify(data, null, 2);
       } catch (err) {
