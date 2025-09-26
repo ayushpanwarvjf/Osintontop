@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Info Lookup</title>
+  <style>
+    body {
+      background: #000;
+      color: #00eaff;
+      font-family: monospace;
+      text-align: center;
+      padding: 30px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background: #00eaff;
+      color: black;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    pre {
+      text-align: left;
+      background: #111;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      max-width: 90%;
+      margin: 20px auto;
+      box-shadow: 0 0 10px #00eaff;
+    }
+  </style>
+</head>
+<body>
+  <h1>📱 Mobile Info Lookup</h1>
+  <input type="text" id="number" placeholder="Enter mobile number" />
+  <button onclick="lookup()">🔍 Lookup</button>
+
+  <pre id="result">Result will appear here...</pre>
+
+  <script>
+    async function lookup() {
+      const number = document.getElementById('number').value.trim();
+      if (!number) {
+        alert("Please enter a number");
+        return;
+      }
+
+      const resBox = document.getElementById('result');
+      resBox.textContent = "⏳ Fetching...";
+
+      try {
+        const res = await fetch(`/.netlify/functions/fetchData?number=${number}`);
+        const data = await res.json();
+        resBox.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        resBox.textContent = "❌ Error: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
