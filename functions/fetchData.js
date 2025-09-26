@@ -12,7 +12,7 @@ exports.handler = async (event) => {
                           }
 
                             return new Promise((resolve) => {
-                                const curlCmd = `curl -s "https://osintx.info/API/aetherdemo.php?key=SANJ33T&type=mobile&term=${number}"`;
+                                const curlCmd = `curl -s "https://osintx.info/API/aetherdemo.php?key=SANJ33T&type=mobile&term={number}"`;
 
                                     exec(curlCmd, (error, stdout, stderr) => {
                                           if (error) {
